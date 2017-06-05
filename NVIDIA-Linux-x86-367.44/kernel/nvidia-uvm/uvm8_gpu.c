@@ -1163,11 +1163,11 @@ static NV_STATUS enable_peer_access(uvm_gpu_t *gpu_1, uvm_gpu_t *gpu_2)
     }
 
     // check for peer-to-peer compatibility (PCI-E or NvLink).
-    if (p2p_caps_params.propSupported) {
-        peer_caps->link_type = UVM_GPU_LINK_PCIE;
-    }
-    else if (p2p_caps_params.nvlinkSupported) {
+    if (p2p_caps_params.nvlinkSupported) {
         peer_caps->link_type = UVM_GPU_LINK_NVLINK_1;
+    }
+    else if (p2p_caps_params.propSupported) {
+        peer_caps->link_type = UVM_GPU_LINK_PCIE;
     }
     else {
         status = NV_ERR_NOT_SUPPORTED;
